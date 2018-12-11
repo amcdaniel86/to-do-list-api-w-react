@@ -8,6 +8,15 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+const cors         = require('cors');
+// require cors as our security package so enable our API to receive server side requests as long as they're coming from this specific location - our react app.
+
+const session     = require ('express-session');
+const bcrypt      = require ('bcryptjs');
+
+require('./config/passport-stuff')
+  // require in the configuration code we put in config/passport-stuff
+
 
 
 mongoose
@@ -50,9 +59,29 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.locals.title = 'Express - Generated with IronGenerator';
 
 
+app.use(session({
+  secret:"some secret goes here:"
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(cors({
+  credentials:true,
+  origin: ['http://localhost:3000']
+}));
+// will accept requests as long as they're from localhost:3000 where the react app is being held. 
+
 
 const index = require('./routes/index');
 app.use('/', index);
 
+const taskRoutes = require('./routes/taskRoutes');
+app.use('/api', taskRoutes);
+// prefix /api for the express api app to separate from the react routes. express routes should ALWAYS be different than the api routes
+// third add routes const to the app.js file.
+
+const userRoutes = require('./routes/user-routes');
+app.use('/api', userRoutes);
 
 module.exports = app;

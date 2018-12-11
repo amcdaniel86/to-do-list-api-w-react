@@ -41,6 +41,11 @@ server.on('error', error => {
   }
 });
 
-server.listen(process.env.PORT, () => {
+server.listen(process.env.PORT || 5000, () => {
   console.log(`Listening on http://localhost:${process.env.PORT}`);
 });
+// || 5000, added to server.listen section
+
+
+
+// in order to run 2 different apps, then in env file, port: must be 5000, anywhere says port in www, change to 5000.
