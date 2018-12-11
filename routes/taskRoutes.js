@@ -4,6 +4,7 @@ const Task = require('../models/Task');
 // import the Task model so we can do Task.find etc.
 
 /* GET home page */
+// All Tasks List
 router.get('/tasks', (req, res, next) => {
   // remember this route is actually /api/tasks because we prefixed this entire file with /api.
   // in app.js line 58
@@ -25,7 +26,7 @@ router.get('/tasks', (req, res, next) => {
 
 });
 
-
+  // One Task Details
   router.get('/task-details/:id', (req, res, next)=>{
     // since we're making this route unique, putting details in it, it is not necessary to put this route at the bottom of the file.
 
@@ -50,6 +51,7 @@ router.get('/tasks', (req, res, next) => {
 // however with an api with intention of a react front-end, we only need 1 route, the post route.
 // because the get route is used to show an hbs file. instead the form the user will fill out, will appear in the react app, and we will have to design the react app so it can successfully make a post request using axios to the post route we are about to define.
 
+// Add a Task to List
     router.post('/tasks/add-new', (req, res, next)=>{
         Task.create({
           title: req.body.theTitle,
@@ -67,6 +69,7 @@ router.get('/tasks', (req, res, next) => {
 
     })
 
+    // Edit a Task
       router.post('/tasks/edit/:id', (req, res, next)=>{
 
         Task.findByIdAndUpdate(req.params.id, {
@@ -94,7 +97,7 @@ router.get('/tasks', (req, res, next) => {
       })
 
 
-
+// Delete a task
       router.post('/tasks/delete/:id', (req, res, next)=>{
 
          Task.findByIdAndRemove(req.params.id)
