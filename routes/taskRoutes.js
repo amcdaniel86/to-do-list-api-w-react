@@ -21,10 +21,9 @@ router.get('/tasks', (req, res, next) => {
 
         res.json(err);
       })
-
-
-
 });
+
+
 
   // One Task Details
   router.get('/task-details/:id', (req, res, next)=>{
@@ -78,13 +77,12 @@ router.get('/tasks', (req, res, next) => {
         })
         .then((response)=>{
             if(response === null){
-              res.json({message: 'sorry we couldnt find the task'})
+              res.json({message: 'sorry we couldnt find the task'});
               return;
             }
             // if there isn't an error, and we can't find a task with that id, then we can do an if statement saying response === null give a message.
             // because this situation will not result in an actual error.
-              res.json([{message: 'this task has been successfully updated'}, response )]
-            }
+              res.json([{message: 'this task has been successfully updated'}, response ]}
           // res.json needs to take an array or object as the argument.
           // you can also put your own message in there as well.
           // pass in object or array for .json, to show a message.
@@ -116,9 +114,6 @@ router.get('/tasks', (req, res, next) => {
           .catch((err)=>{
             res.json(err);
           })
-
-
-
       })
 
 
