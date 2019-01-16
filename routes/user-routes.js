@@ -114,3 +114,5 @@ router.get('/loggedin', (req, res, next) => {
 
 // whatever is exported at bottom - needs to be labelled router.
 module.exports = router;
+
+// bottom line always tells program what is exported from this page
