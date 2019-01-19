@@ -44,3 +44,6 @@ passport.deserializeUser((userIdFromSession, cb) => {
       next(null, foundUser);
     });
   }));
+
+
+  // this file contains all the relevant info for the passport configuration.
